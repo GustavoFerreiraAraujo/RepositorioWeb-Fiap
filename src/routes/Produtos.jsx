@@ -1,32 +1,36 @@
 import { Link } from "react-router-dom"
 import { ListaProdutos } from "../Components/ListaProdutos"
-import  "./Produtos.css"
-import { AiTwotoneDelete as Excluir} from "react-icons/ai"
+import  styles from "./Produtos.module.css";
+import {AiFillEdit as Editar} from "react-icons/ai";
+import {MdDeleteForever as Excluir} from "react-icons/md";
+import { useEffect, useState } from "react";
 
 export default function Produtos() {
 
-  document.title = "Lista de Produtos"
+  document.title = "Lista de Produtos";
+  useEffect(()=>{
+    console.log("useEfect sera renderizado sempre que qualquer objeto for renderizado!");
+  });
 
-  // estilos da tabela 
-  const tdEstilos = {
-    textAlign:"center",
-    letterSpacing:"2px",
-    color:"#0000ff",
-    textDecoration:"none"
-  }
+
+  const [counter,setCounter]= useState(0)
 
 
   return (
     <div>
         <h1>Produtos</h1>
 
-        <table>
+        <div>
+          <button onClick={()=> setCounter(counter)}>COUNTER - {counter}</button>
+        </div>
+
+        <table className={styles.table}>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>NOME</th>
-                <th>PREÇO</th>
-                <th>EDITAR/ EXCLUIR</th>
+                <th className={styles.tableHeader}>ID</th>
+                <th className={styles.tableHeader}>NOME</th>
+                <th className={styles.tableHeader}>PREÇO</th>
+                <th className={styles.tableHeader}>EDITAR / EXCLUIR</th>
             </tr>
             </thead>
             <tbody>
@@ -35,7 +39,7 @@ export default function Produtos() {
                     <td>{produto.id}</td>
                     <td>{produto.nome}</td>
                     <td>{produto.preco}</td>
-                    <td><Link to={`/editar/produtos/${produto.id}`}>Editar</Link> | <Link to={`/excluir/produtos/${produto.id}`}><Excluir/>Excluir</Link></td>
+                    <td><Link to={`/editar/produtos/${produto.id}`}> <Editar/> </Link> | <Link to={`/excluir/produtos/${produto.id}`}> <Excluir/> </Link></td>
                  </tr>
             ))}
         </tbody>
