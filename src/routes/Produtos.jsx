@@ -8,20 +8,34 @@ import { useEffect, useState } from "react";
 export default function Produtos() {
 
   document.title = "Lista de Produtos";
+  
+
+  const [counter,setCounter]= useState(0)
+
+  const [counter2,setCounter2]= useState(0)
+  
   useEffect(()=>{
     console.log("useEfect sera renderizado sempre que qualquer objeto for renderizado!");
   });
 
-
-  const [counter,setCounter]= useState(0)
-
+  useEffect(()=>{
+    console.log("useEfect sera renderizado apenas uma vez");
+  },[]);
+  
+  useEffect(()=>{
+    console.log("useEfect sera renderizado apenas se um objeto variacel/ constante estiverno array de dependencias sofer uma atualizacao");
+  },[]);
 
   return (
     <div>
         <h1>Produtos</h1>
 
         <div>
-          <button onClick={()=> setCounter(counter)}>COUNTER - {counter}</button>
+          <button onClick={()=> setCounter(counter + 1)}>COUNTER - {counter}</button>
+        </div>
+
+        <div>
+          <button onClick={()=> setCounter2(counter2 + 1)}>COUNTER2 - {counter2}</button>
         </div>
 
         <table className={styles.table}>
